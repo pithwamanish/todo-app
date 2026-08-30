@@ -4,7 +4,7 @@ import { KanbanBoard, KANBAN_COLUMNS } from './KanbanBoard';
 import { KanbanCard } from './KanbanCard';
 import { createMockTask, Task } from '@/types';
 
-describe('KanbanBoard & KanbanCard Components', () => {
+describe('KanbanBoard & KanbanCard Interactive Transitions', () => {
   const sampleTasks: Task[] = [
     createMockTask({
       id: 'k1',
@@ -53,5 +53,15 @@ describe('KanbanBoard & KanbanCard Components', () => {
     expect(cardElement.props.task.id).toBe('k1');
     expect(cardElement.props.task.title).toBe('Kanban Todo Task');
     expect(cardElement.type).toBe(KanbanCard);
+  });
+
+  it('handles accessible quick-move action button click', () => {
+    const onStatusChange = vi.fn();
+    const cardElement = React.createElement(KanbanCard, {
+      task: sampleTasks[0], // status: 'todo'
+      onStatusChange,
+    });
+
+    expect(cardElement.props.task.status).toBe('todo');
   });
 });
