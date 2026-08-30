@@ -9,6 +9,8 @@
 /build
 /dist
 /.vitest/
+*.tsbuildinfo
+
 
 # Logs & Misc
 npm-debug.log*
