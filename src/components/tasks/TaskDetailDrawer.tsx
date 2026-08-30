@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Task, TaskStatus, TaskPriority } from '@/types';
+import { Task, TaskStatus, TaskPriority, Subtask } from '@/types';
+import { SubtaskChecklist } from './SubtaskChecklist';
 
 export interface TaskDetailDrawerProps {
   task: Task | null;
@@ -62,6 +63,12 @@ export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
     if (onUpdateTask) {
       const val = e.target.value ? new Date(e.target.value).toISOString() : null;
       onUpdateTask(task.id, { dueDate: val });
+    }
+  };
+
+  const handleSubtasksChange = (newSubtasks: Subtask[]) => {
+    if (onUpdateTask) {
+      onUpdateTask(task.id, { subtasks: newSubtasks });
     }
   };
 
@@ -305,6 +312,12 @@ export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
               }}
             />
           </div>
+
+          {/* Subtask Checklist */}
+          <SubtaskChecklist
+            subtasks={task.subtasks || []}
+            onSubtasksChange={handleSubtasksChange}
+          />
         </div>
 
         {/* Footer Actions */}
