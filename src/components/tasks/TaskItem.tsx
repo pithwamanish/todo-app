@@ -36,6 +36,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
     }
   };
 
+  const completedSubtasks = task.subtasks?.filter((s) => s.completed).length || 0;
+  const totalSubtasks = task.subtasks?.length || 0;
+
   return (
     <div
       data-testid={`task-item-${task.id}`}
@@ -44,18 +47,29 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '12px 16px',
-        margin: '6px 0',
+        padding: '14px 18px',
+        margin: '8px 0',
         backgroundColor: 'var(--bg-secondary)',
         border: '1px solid var(--border-color)',
-        borderRadius: '8px',
+        borderRadius: '10px',
         cursor: 'pointer',
-        transition: 'all 0.15s ease',
-        gap: '12px',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        gap: '16px',
+        boxShadow: 'var(--shadow-sm)',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-1px)';
+        e.currentTarget.style.borderColor = 'var(--primary-color)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.borderColor = 'var(--border-color)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
       }}
     >
       {/* Checkbox & Title */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
         <input
           type="checkbox"
           checked={isCompleted}
@@ -63,15 +77,16 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
           onClick={handleCheckboxClick}
           data-testid={`task-checkbox-${task.id}`}
           style={{
-            width: '18px',
-            height: '18px',
+            width: '20px',
+            height: '20px',
             cursor: 'pointer',
             accentColor: 'var(--primary-color)',
+            borderRadius: '4px',
           }}
         />
         <span
           style={{
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: '0.95rem',
             color: isCompleted ? 'var(--text-muted)' : 'var(--text-primary)',
             textDecoration: isCompleted ? 'line-through' : 'none',
@@ -82,6 +97,22 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
         >
           {task.title}
         </span>
+
+        {/* Subtask count badge */}
+        {totalSubtasks > 0 && (
+          <span
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              padding: '2px 8px',
+              borderRadius: '10px',
+              backgroundColor: 'var(--bg-tertiary)',
+              color: 'var(--text-secondary)',
+            }}
+          >
+            ☑ {completedSubtasks}/{totalSubtasks}
+          </span>
+        )}
       </div>
 
       {/* Badges & Due Date */}
@@ -90,13 +121,14 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
         <span
           data-testid={`task-status-${task.id}`}
           style={{
-            padding: '2px 8px',
+            padding: '4px 10px',
             borderRadius: '12px',
             fontSize: '0.75rem',
-            fontWeight: 600,
+            fontWeight: 700,
             backgroundColor: `var(--status-${task.status}-bg)`,
             color: `var(--status-${task.status}-text)`,
             textTransform: 'capitalize',
+            letterSpacing: '0.02em',
           }}
         >
           {task.status.replace('_', ' ')}
@@ -106,13 +138,14 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
         <span
           data-testid={`task-priority-${task.id}`}
           style={{
-            padding: '2px 8px',
+            padding: '4px 10px',
             borderRadius: '12px',
             fontSize: '0.75rem',
-            fontWeight: 600,
+            fontWeight: 700,
             backgroundColor: `var(--priority-${task.priority}-bg)`,
             color: `var(--priority-${task.priority}-text)`,
             textTransform: 'capitalize',
+            letterSpacing: '0.02em',
           }}
         >
           {task.priority}
@@ -123,8 +156,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onSele
           data-testid={`task-duedate-${task.id}`}
           style={{
             fontSize: '0.8rem',
+            fontWeight: 500,
             color: 'var(--text-muted)',
-            minWidth: '80px',
+            minWidth: '85px',
             textAlign: 'right',
           }}
         >

@@ -122,9 +122,11 @@ export const AIAssistantPanel: React.FC<AIAssistantPanelProps> = ({
         width: '100%',
         maxWidth: '400px',
         backgroundColor: 'var(--bg-secondary)',
+        color: 'var(--text-primary)',
         borderLeft: '1px solid var(--border-color)',
-        boxShadow: 'var(--shadow-lg)',
-        zIndex: 150,
+        boxShadow: '-4px 0 20px rgba(0, 0, 0, 0.15)',
+        zIndex: 1500,
+        isolation: 'isolate',
         display: 'flex',
         flexDirection: 'column',
       }}

@@ -110,31 +110,33 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
         flexWrap: 'wrap',
         gap: '12px',
         alignItems: 'center',
-        padding: '16px',
+        padding: '16px 20px',
         backgroundColor: 'var(--bg-secondary)',
         border: '1px solid var(--border-color)',
-        borderRadius: '8px',
+        borderRadius: '12px',
         marginBottom: '16px',
+        boxShadow: 'var(--shadow-sm)',
       }}
     >
       {/* Text Search Input */}
-      <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center' }}>
+      <div style={{ flex: '1 1 220px', display: 'flex', alignItems: 'center' }}>
         <input
           type="text"
           value={filters.search}
           onChange={handleSearchChange}
-          placeholder="Search tasks..."
+          placeholder="🔍 Search tasks..."
           aria-label="Search tasks"
           data-testid="search-input"
           style={{
             width: '100%',
-            padding: '8px 12px',
-            borderRadius: '6px',
+            padding: '10px 14px',
+            borderRadius: '8px',
             border: '1px solid var(--border-color)',
             backgroundColor: 'var(--bg-primary)',
             color: 'var(--text-primary)',
             fontSize: '0.875rem',
             outline: 'none',
+            transition: 'all 0.15s ease',
           }}
         />
       </div>
@@ -146,12 +148,13 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
         aria-label="Filter by status"
         data-testid="status-select"
         style={{
-          padding: '8px 12px',
-          borderRadius: '6px',
+          padding: '10px 14px',
+          borderRadius: '8px',
           border: '1px solid var(--border-color)',
           backgroundColor: 'var(--bg-primary)',
           color: 'var(--text-primary)',
           fontSize: '0.875rem',
+          fontWeight: 500,
           cursor: 'pointer',
         }}
       >
@@ -169,12 +172,13 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
         aria-label="Filter by priority"
         data-testid="priority-select"
         style={{
-          padding: '8px 12px',
-          borderRadius: '6px',
+          padding: '10px 14px',
+          borderRadius: '8px',
           border: '1px solid var(--border-color)',
           backgroundColor: 'var(--bg-primary)',
           color: 'var(--text-primary)',
           fontSize: '0.875rem',
+          fontWeight: 500,
           cursor: 'pointer',
         }}
       >
@@ -192,12 +196,13 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
         aria-label="Sort by"
         data-testid="sort-select"
         style={{
-          padding: '8px 12px',
-          borderRadius: '6px',
+          padding: '10px 14px',
+          borderRadius: '8px',
           border: '1px solid var(--border-color)',
           backgroundColor: 'var(--bg-primary)',
           color: 'var(--text-primary)',
           fontSize: '0.875rem',
+          fontWeight: 500,
           cursor: 'pointer',
         }}
       >
@@ -214,13 +219,13 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({ filters, onFilterChang
           onClick={handleClearFilters}
           data-testid="clear-filters-btn"
           style={{
-            padding: '8px 12px',
-            borderRadius: '6px',
+            padding: '10px 14px',
+            borderRadius: '8px',
             border: 'none',
             backgroundColor: 'var(--bg-tertiary)',
             color: 'var(--text-secondary)',
             fontSize: '0.875rem',
-            fontWeight: 500,
+            fontWeight: 600,
             cursor: 'pointer',
             transition: 'all 0.15s ease',
           }}

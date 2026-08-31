@@ -80,25 +80,29 @@ export const AppShell: React.FC<AppShellProps> = ({
       {/* Top Navigation Header */}
       <header
         data-testid="header-bar"
+        className="glass-panel"
         style={{
-          height: '56px',
-          backgroundColor: 'var(--bg-secondary)',
+          height: '60px',
           borderBottom: '1px solid var(--border-color)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 20px',
+          padding: '0 24px',
           flexShrink: 0,
           zIndex: 10,
+          boxShadow: 'var(--shadow-sm)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--primary-color)' }}>
+          <span
+            className="gradient-text"
+            style={{ fontSize: '1.35rem', fontWeight: 800, letterSpacing: '-0.02em' }}
+          >
             ✨ TaskFlow AI
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <ThemeToggle />
         </div>
       </header>
@@ -121,7 +125,7 @@ export const AppShell: React.FC<AppShellProps> = ({
           style={{
             flex: 1,
             overflowY: 'auto',
-            padding: '24px',
+            padding: '28px',
             backgroundColor: 'var(--bg-primary)',
           }}
         >
@@ -131,3 +135,4 @@ export const AppShell: React.FC<AppShellProps> = ({
     </div>
   );
 };
+

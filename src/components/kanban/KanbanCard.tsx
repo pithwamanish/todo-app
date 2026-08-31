@@ -62,15 +62,25 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({ task, onSelectTask, onSt
       style={{
         backgroundColor: 'var(--bg-secondary)',
         border: '1px solid var(--border-color)',
-        borderRadius: '8px',
-        padding: '12px 14px',
-        marginBottom: '10px',
+        borderRadius: '10px',
+        padding: '14px 16px',
+        marginBottom: '12px',
         boxShadow: 'var(--shadow-sm)',
         cursor: 'grab',
-        transition: 'all 0.15s ease',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px',
+        gap: '10px',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.style.borderColor = 'var(--primary-color)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.borderColor = 'var(--border-color)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
       }}
     >
       {/* Title & Quick Move Button */}
@@ -78,8 +88,8 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({ task, onSelectTask, onSt
         <h4
           data-testid={`kanban-title-${task.id}`}
           style={{
-            fontSize: '0.9rem',
-            fontWeight: 600,
+            fontSize: '0.925rem',
+            fontWeight: 700,
             color: 'var(--text-primary)',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
@@ -100,14 +110,15 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({ task, onSelectTask, onSt
           title={`Move to ${NEXT_STATUS_MAP[task.status].replace('_', ' ')}`}
           aria-label={`Move task ${task.title} to ${NEXT_STATUS_MAP[task.status].replace('_', ' ')}`}
           style={{
-            border: 'none',
+            border: '1px solid var(--border-color)',
             background: 'var(--bg-tertiary)',
             color: 'var(--text-secondary)',
-            borderRadius: '4px',
-            padding: '2px 6px',
+            borderRadius: '6px',
+            padding: '3px 8px',
             fontSize: '0.75rem',
             cursor: 'pointer',
-            fontWeight: 600,
+            fontWeight: 700,
+            transition: 'all 0.15s ease',
           }}
         >
           →
@@ -144,19 +155,20 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({ task, onSelectTask, onSt
         <span
           data-testid={`kanban-priority-${task.id}`}
           style={{
-            padding: '2px 8px',
+            padding: '3px 9px',
             borderRadius: '10px',
-            fontWeight: 600,
+            fontWeight: 700,
             backgroundColor: `var(--priority-${task.priority}-bg)`,
             color: `var(--priority-${task.priority}-text)`,
             textTransform: 'capitalize',
+            letterSpacing: '0.02em',
           }}
         >
           {task.priority}
         </span>
 
         {/* Subtask & Due Date info */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontWeight: 500 }}>
           {totalSubtasks > 0 && (
             <span data-testid={`kanban-subtasks-${task.id}`}>
               ☑ {completedSubtasks}/{totalSubtasks}

@@ -92,10 +92,11 @@ export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
         right: 0,
         bottom: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        backdropFilter: 'blur(2px)',
-        zIndex: 100,
+        backdropFilter: 'blur(3px)',
+        zIndex: 1000,
         display: 'flex',
         justifyContent: 'flex-end',
+        isolation: 'isolate',
       }}
     >
       <div
@@ -109,12 +110,15 @@ export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
           maxWidth: '480px',
           height: '100%',
           backgroundColor: 'var(--bg-secondary)',
+          color: 'var(--text-primary)',
           borderLeft: '1px solid var(--border-color)',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: 'var(--shadow-lg)',
+          boxShadow: '-4px 0 20px rgba(0, 0, 0, 0.15)',
           overflowY: 'auto',
           padding: '24px',
+          zIndex: 1001,
+          position: 'relative',
         }}
       >
         {/* Drawer Header */}

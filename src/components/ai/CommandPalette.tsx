@@ -95,9 +95,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
         backdropFilter: 'blur(3px)',
-        zIndex: 200,
+        zIndex: 2000,
+        isolation: 'isolate',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
@@ -112,44 +113,48 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         onClick={(e) => e.stopPropagation()}
         style={{
           width: '100%',
-          maxWidth: '600px',
+          maxWidth: '620px',
           backgroundColor: 'var(--bg-secondary)',
+          color: 'var(--text-primary)',
           border: '1px solid var(--border-color)',
-          borderRadius: '12px',
-          boxShadow: 'var(--shadow-lg)',
+          borderRadius: '16px',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
         }}
       >
         {/* Search / Prompt Input Form */}
-        <form onSubmit={handleSubmit} style={{ margin: 0, padding: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ fontSize: '1.2rem' }}>✨</span>
+        <form onSubmit={handleSubmit} style={{ margin: 0, padding: '18px 20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <span style={{ fontSize: '1.3rem' }}>✨</span>
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Type a command or create task with natural language... (e.g. Write docs !high tomorrow)"
+              placeholder="Type a command or natural language task... (e.g. Write docs !high tomorrow)"
               data-testid="palette-input"
               style={{
                 flex: 1,
-                padding: '8px',
+                padding: '8px 0',
                 border: 'none',
                 backgroundColor: 'transparent',
                 color: 'var(--text-primary)',
-                fontSize: '1rem',
+                fontSize: '1.05rem',
                 outline: 'none',
+                fontWeight: 500,
               }}
             />
             <span
               style={{
                 fontSize: '0.75rem',
+                fontWeight: 700,
                 color: 'var(--text-muted)',
                 backgroundColor: 'var(--bg-tertiary)',
-                padding: '2px 6px',
-                borderRadius: '4px',
+                padding: '4px 8px',
+                borderRadius: '6px',
+                border: '1px solid var(--border-color)',
               }}
             >
               ESC
@@ -160,14 +165,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         <div style={{ height: '1px', backgroundColor: 'var(--border-color)' }} />
 
         {/* Quick Actions List */}
-        <div style={{ padding: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+        <div style={{ padding: '12px', maxHeight: '320px', overflowY: 'auto' }}>
           <div
             style={{
               fontSize: '0.75rem',
-              fontWeight: 600,
+              fontWeight: 700,
               color: 'var(--text-muted)',
               padding: '6px 12px',
               textTransform: 'uppercase',
+              letterSpacing: '0.05em',
             }}
           >
             Quick Actions
@@ -175,8 +181,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {filteredActions.length === 0 ? (
             <div
               style={{
-                padding: '12px',
-                fontSize: '0.85rem',
+                padding: '16px 12px',
+                fontSize: '0.9rem',
                 color: 'var(--text-muted)',
                 fontStyle: 'italic',
               }}
@@ -192,8 +198,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 onClick={() => handleActionClick(action.id)}
                 style={{
                   width: '100%',
-                  padding: '10px 12px',
-                  borderRadius: '6px',
+                  padding: '12px 14px',
+                  borderRadius: '8px',
                   border: 'none',
                   backgroundColor: 'transparent',
                   color: 'var(--text-primary)',
@@ -201,12 +207,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   textAlign: 'left',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
-                  fontSize: '0.9rem',
+                  gap: '12px',
+                  fontSize: '0.925rem',
+                  fontWeight: 500,
                   transition: 'background-color 0.15s ease',
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
               >
-                <span>{action.icon}</span>
+                <span style={{ fontSize: '1.1rem' }}>{action.icon}</span>
                 <span style={{ flex: 1 }}>{action.label}</span>
               </button>
             ))

@@ -26,13 +26,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <aside
       data-testid="sidebar"
       style={{
-        width: isCollapsed ? '64px' : '240px',
+        width: isCollapsed ? '68px' : '250px',
         backgroundColor: 'var(--bg-secondary)',
         borderRight: '1px solid var(--border-color)',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        transition: 'width 0.2s ease',
+        transition: 'width 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
         userSelect: 'none',
         flexShrink: 0,
       }}
@@ -51,11 +51,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <span
             style={{
               fontWeight: 700,
-              fontSize: '1.1rem',
-              color: 'var(--primary-color)',
+              fontSize: '0.9rem',
+              color: 'var(--text-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
             }}
           >
-            Todo Workspace
+            Workspace
           </span>
         )}
         <button
@@ -65,13 +67,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
           aria-label={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
           title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
           style={{
-            background: 'none',
-            border: 'none',
+            background: 'var(--bg-tertiary)',
+            border: '1px solid var(--border-color)',
             cursor: 'pointer',
-            fontSize: '1rem',
+            fontSize: '0.8rem',
             color: 'var(--text-secondary)',
-            padding: '4px 8px',
-            borderRadius: '4px',
+            padding: '6px 10px',
+            borderRadius: '6px',
+            transition: 'all 0.15s ease',
           }}
         >
           {isCollapsed ? '▶' : '◀'}
@@ -81,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* View Switcher Section */}
       <div
         style={{
-          padding: isCollapsed ? '12px 8px' : '12px 16px',
+          padding: isCollapsed ? '14px 8px' : '14px 16px',
           borderBottom: '1px solid var(--border-color)',
         }}
       >
@@ -89,10 +92,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div
             style={{
               fontSize: '0.75rem',
-              fontWeight: 600,
+              fontWeight: 700,
               color: 'var(--text-muted)',
               textTransform: 'uppercase',
-              marginBottom: '8px',
+              letterSpacing: '0.05em',
+              marginBottom: '10px',
             }}
           >
             Views
@@ -102,10 +106,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
           style={{
             display: 'flex',
             flexDirection: isCollapsed ? 'column' : 'row',
-            gap: '4px',
+            gap: '6px',
             backgroundColor: 'var(--bg-tertiary)',
             padding: '4px',
-            borderRadius: '6px',
+            borderRadius: '8px',
           }}
         >
           <button
@@ -114,18 +118,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => onSelectViewMode('list')}
             style={{
               flex: 1,
-              padding: '6px 8px',
+              padding: '8px 10px',
               border: 'none',
-              borderRadius: '4px',
+              borderRadius: '6px',
               backgroundColor: viewMode === 'list' ? 'var(--bg-secondary)' : 'transparent',
               color: viewMode === 'list' ? 'var(--primary-color)' : 'var(--text-secondary)',
-              fontWeight: viewMode === 'list' ? 600 : 400,
+              fontWeight: viewMode === 'list' ? 700 : 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
+              boxShadow: viewMode === 'list' ? 'var(--shadow-sm)' : 'none',
+              transition: 'all 0.15s ease',
             }}
           >
             <span>📋</span>
@@ -137,18 +143,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => onSelectViewMode('kanban')}
             style={{
               flex: 1,
-              padding: '6px 8px',
+              padding: '8px 10px',
               border: 'none',
-              borderRadius: '4px',
+              borderRadius: '6px',
               backgroundColor: viewMode === 'kanban' ? 'var(--bg-secondary)' : 'transparent',
               color: viewMode === 'kanban' ? 'var(--primary-color)' : 'var(--text-secondary)',
-              fontWeight: viewMode === 'kanban' ? 600 : 400,
+              fontWeight: viewMode === 'kanban' ? 700 : 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
+              boxShadow: viewMode === 'kanban' ? 'var(--shadow-sm)' : 'none',
+              transition: 'all 0.15s ease',
             }}
           >
             <span>📊</span>
@@ -161,7 +169,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <nav
         style={{
           flex: 1,
-          padding: isCollapsed ? '12px 8px' : '12px 16px',
+          padding: isCollapsed ? '14px 8px' : '14px 16px',
           overflowY: 'auto',
         }}
       >
@@ -171,22 +179,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => onSelectProject(null)}
           style={{
             width: '100%',
-            padding: '8px 12px',
-            marginBottom: '12px',
+            padding: '10px 12px',
+            marginBottom: '14px',
             border: 'none',
-            borderRadius: '6px',
+            borderRadius: '8px',
             backgroundColor: selectedProjectId === null ? 'var(--bg-tertiary)' : 'transparent',
             color: selectedProjectId === null ? 'var(--primary-color)' : 'var(--text-primary)',
-            fontWeight: selectedProjectId === null ? 600 : 400,
+            fontWeight: selectedProjectId === null ? 700 : 500,
             cursor: 'pointer',
             textAlign: 'left',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '10px',
             fontSize: '0.9rem',
+            transition: 'all 0.15s ease',
           }}
         >
-          <span>📁</span>
+          <span style={{ fontSize: '1.05rem' }}>📁</span>
           {!isCollapsed && <span>All Tasks</span>}
         </button>
 
@@ -194,10 +203,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div
             style={{
               fontSize: '0.75rem',
-              fontWeight: 600,
+              fontWeight: 700,
               color: 'var(--text-muted)',
               textTransform: 'uppercase',
-              marginBottom: '8px',
+              letterSpacing: '0.05em',
+              marginBottom: '10px',
             }}
           >
             Projects ({projects.length})
@@ -215,21 +225,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => onSelectProject(proj.id)}
                 style={{
                   width: '100%',
-                  padding: '8px 12px',
+                  padding: '9px 12px',
                   border: 'none',
-                  borderRadius: '6px',
+                  borderRadius: '8px',
                   backgroundColor: isSelected ? 'var(--bg-tertiary)' : 'transparent',
                   color: isSelected ? 'var(--primary-color)' : 'var(--text-secondary)',
-                  fontWeight: isSelected ? 600 : 400,
+                  fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
                   textAlign: 'left',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.85rem',
+                  gap: '10px',
+                  fontSize: '0.875rem',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
+                  transition: 'all 0.15s ease',
                 }}
               >
                 <span>🏷️</span>
@@ -242,3 +253,4 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </aside>
   );
 };
+
